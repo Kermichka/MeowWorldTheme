@@ -97,6 +97,7 @@
              show_rating: section.settings.show_rating,
              show_quick_add: section.settings.enable_quick_add,
              section_id: section.id,
+             border_thickness: section.settings.border_thickness,
              border_form: section.settings.border_form %}
           </li>
         {%- else -%}
@@ -272,6 +273,20 @@
       }, {
         "type": "header",
         "content": "t:sections.featured-collection.settings.header.content"
+      }, {
+        "type": "select",
+        "id": "border_thickness",
+        "label": "Border-Thickness",
+        "options": [
+          {
+            "value": "thick",
+            "label": "Thick"
+          }, {
+            "value": "thin",
+            "label": "Thin"
+          }
+        ],
+        "default": "thin"
       }, {
         "type": "select",
         "id": "border_form",

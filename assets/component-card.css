@@ -14,15 +14,20 @@
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
   transform: scale(1.05);
 }
+.card-wrapper-thin {
+  border: thin solid #aaa;
+}
+.card-wrapper-thick {
+  border: thick solid #aaa;
+}
 
 .card-wrapper-square {
-  border: thin solid #aaa;
   border-radius: 0px;
 }
 .card-wrapper-oval {
-  border: thin solid #aaa;
   border-radius: 25px;
 }
+
 .card {
   text-decoration: none;
   text-align: center;
