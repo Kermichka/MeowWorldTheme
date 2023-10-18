@@ -1,5 +1,12 @@
 {
   "sections": {
+    "d568f550-702e-4719-8f66-daf6dbd22310": {
+      "type": "image-banner",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/cat-eating_48e04625-c731-41d9-af55-ca1fbe77f0d1.jpg",
+        "image_height": "small"
+      }
+    },
     "banner": {
       "type": "main-collection-banner",
       "settings": {
@@ -11,13 +18,16 @@
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
-        "products_per_page": 16,
-        "columns_desktop": 4,
+        "products_per_page": 12,
+        "columns_desktop": 3,
         "image_ratio": "adapt",
+        "image_shape": "default",
         "show_secondary_image": false,
         "show_vendor": false,
         "show_rating": false,
+        "enable_quick_add": false,
         "enable_filtering": true,
+        "filter_type": "horizontal",
         "enable_sorting": true,
         "columns_mobile": "2",
         "padding_top": 36,
@@ -26,6 +36,7 @@
     }
   },
   "order": [
+    "d568f550-702e-4719-8f66-daf6dbd22310",
     "banner",
     "product-grid"
   ]
