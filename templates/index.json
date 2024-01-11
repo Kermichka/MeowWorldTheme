@@ -3,9 +3,7 @@
     "image_banner": {
       "type": "image-banner",
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "color_scheme": "inverse"
+        "image_height": "large"
       }
     },
     "rich_text": {
@@ -14,7 +12,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Welcome to MeowWorld's Cat Food Shop! We offer a premium selection of high-quality cat food products to keep your feline companions happy and healthy. From wet food to dry kibble, we have the perfect options to satisfy even the pickiest eaters. Shop with confidence knowing that each product is carefully curated to meet your cat's nutritional needs. Discover the best for your furry friends at MeowWorld's Cat Food Shop.<\/p>"
+            "text": "<p>Welcome to MeowWorld's Cat Food Shop! We offer a premium selection of high-quality cat food products to keep your feline companions happy and healthy. From wet food to dry kibble, we have the perfect options to satisfy even the pickiest eaters. Shop with confidence knowing that each product is carefully curated to meet your cat's nutritional needs. Discover the best for your cat at MeowWorld's Cat Food Shop.<\/p>"
           }
         }
       },
@@ -22,6 +20,8 @@
         "text"
       ],
       "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
         "color_scheme": "background-1",
         "full_width": true,
         "padding_top": 40,
@@ -33,15 +33,23 @@
       "settings": {
         "title": "Featured products",
         "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
         "collection": "all",
         "products_to_show": 8,
         "columns_desktop": 4,
+        "full_width": false,
         "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
         "color_scheme": "background-1",
         "image_ratio": "adapt",
+        "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
+        "enable_quick_add": false,
         "columns_mobile": "2",
         "swipe_on_mobile": false,
         "padding_top": 28,
