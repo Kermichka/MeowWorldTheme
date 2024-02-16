@@ -26,7 +26,18 @@ jobs:
   #       run: exit 0
   deploy:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/hunt-2'
     steps:
-      - name: Push changes to [UNSTABLE] Symmetry
-        run: shopify theme push --store meow-world-development -t "[UNSTABLE]"
+      - name: Checkout repository code
+        uses: actions/checkout@v2
+
+      - name: Install Shopify CLI
+        run: |
+          curl -fsSL https://shopify.dev/cli/install.sh | sh
+
+      - name: Authenticate with Shopify
+        run: |
+          shopify login --store meow-world-development --auth shopify-cli-access-token
+
+      - name: Push changes to Shopify theme
+        run: |
+          shopify theme push --store meow-world-development -t "[UNSTABLE]"
