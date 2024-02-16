@@ -28,6 +28,6 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/hunt-2'
     steps:
-      uses: actions/checkout@v4
       - name: Push changes to [UNSTABLE] Symmetry
+      uses: actions/checkout@v4
       - run: shopify theme push --store meow-world-development -t "[UNSTABLE]"
