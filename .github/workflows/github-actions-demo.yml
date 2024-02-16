@@ -29,4 +29,4 @@ jobs:
     if: github.ref == 'refs/heads/hunt-2'
     steps:
       - name: Push changes to [UNSTABLE] Symmetry
-      - run: shopify theme push --store meow-world-development -t "[UNSTABLE]"
+        run: shopify theme push --store meow-world-development -t "[UNSTABLE]"
