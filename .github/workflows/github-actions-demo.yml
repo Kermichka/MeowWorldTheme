@@ -22,8 +22,8 @@ jobs:
       - name: Deploy
         env:
           # Store URL, like your-store.myshopify.com
-          SHOPIFY_FLAG_STORE: '${{ secrets.SHOPIFY_STORE }}'
+          SHOPIFY_FLAG_STORE: 'meow-world-development'
           # Password generated from Theme Access app
-          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}
+          SHOPIFY_CLI_THEME_TOKEN: shptka_4c4b60aedff4c3fc95e47a41ac49557d
           SHOPIFY_CLI_TTY: 0
         run: shopify theme push --path ./ -t "[UNSTABLE]"
