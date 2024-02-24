@@ -23,7 +23,7 @@ jobs:
       - name: Install Shopify CLI
         run: npm install -g @shopify/cli @shopify/theme
 
-            - name: Deploy
+      - name: Deploy
         strategy:
           matrix:
             include:
@@ -31,7 +31,6 @@ jobs:
                 shopify_cli_theme_token: ${{ secrets.MWD_SHOPIFY_CLI_THEME_TOKEN }}
                 shopify_cli_tty: '0'
                 shopify_theme_id: '164839686455'
-
         env:
           SHOPIFY_FLAG_STORE: ${{ matrix.flag_store }}
           SHOPIFY_CLI_THEME_TOKEN: ${{ matrix.cli_token }}
