@@ -9,12 +9,12 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     strategy:
-          matrix:
-            include:
-              - shopify_flag_store: 'meow-world-development'
-                shopify_cli_theme_token: ${{ secrets.MWD_SHOPIFY_CLI_THEME_TOKEN }}
-                shopify_cli_tty: '0'
-                shopify_theme_id: '164839686455'
+      matrix:
+        include:
+          - shopify_flag_store: 'meow-world-development'
+            shopify_cli_theme_token: ${{ secrets.MWD_SHOPIFY_CLI_THEME_TOKEN }}
+            shopify_cli_tty: '0'
+            shopify_theme_id: '164839686455'
     steps:
       - uses: actions/checkout@v1
 
@@ -32,9 +32,8 @@ jobs:
 
       - name: Deploy
         env:
-          SHOPIFY_FLAG_STORE: ${{ matrix.flag_store }}
-          SHOPIFY_CLI_THEME_TOKEN: ${{ matrix.cli_token }}
-          SHOPIFY_CLI_TTY: ${{ matrix.cli_tty }}
+          SHOPIFY_FLAG_STORE: ${{ matrix.shopify_flag_store }}
+          SHOPIFY_CLI_THEME_TOKEN: ${{ matrix.shopify_cli_theme_token }}
+          SHOPIFY_CLI_TTY: ${{ matrix.shopify_cli_tty }}
 
-          # matrix for many shops with many tokens
         run: shopify theme push --path ./ -t ${{ matrix.shopify_theme_id }}
