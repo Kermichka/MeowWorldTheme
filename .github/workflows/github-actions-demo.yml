@@ -10,20 +10,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.1
           bundler: 'latest'
+
       - name: Install Shopify CLI
         run: npm install -g @shopify/cli @shopify/theme
-      - name: Deploy
+
+            - name: Deploy
+        strategy:
+          matrix:
+            include:
+              - shopify_flag_store: 'meow-world-development'
+                shopify_cli_theme_token: ${{ secrets.MWD_SHOPIFY_CLI_THEME_TOKEN }}
+                shopify_cli_tty: '0'
+                shopify_theme_id: '164839686455'
+
         env:
-          # Store URL, like your-store.myshopify.com
-          SHOPIFY_FLAG_STORE: 'meow-world-development'
-          # Password generated from Theme Access app
-          SHOPIFY_CLI_THEME_TOKEN: shptka_4c4b60aedff4c3fc95e47a41ac49557d
-          SHOPIFY_CLI_TTY: 0
-        run: shopify theme push --path ./ -t "[UNSTABLE]"
+          SHOPIFY_FLAG_STORE: ${{ matrix.flag_store }}
+          SHOPIFY_CLI_THEME_TOKEN: ${{ matrix.cli_token }}
+          SHOPIFY_CLI_TTY: ${{ matrix.cli_tty }}
+
+          # matrix for many shops with many tokens
+        run: shopify theme push --path ./ -t ${{ matrix.shopify_theme_id }}
