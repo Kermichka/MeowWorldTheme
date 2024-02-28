@@ -17,6 +17,10 @@ jobs:
 
     - run: pre-commit run --all-files
 
-    - run: npm init
+    - name: Initialize npm
+      run: npm init -y
+      working-directory: ${{ github.workspace }}
 
-    - run: npm run lint
+    - name: Run lint
+      run: npm run lint
+      working-directory: ${{ github.workspace }}
