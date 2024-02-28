@@ -37,9 +37,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 20
+      - runs:
+        using: 'node20'
 
       - uses: ruby/setup-ruby@v1
         with:
