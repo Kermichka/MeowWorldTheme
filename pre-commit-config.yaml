@@ -1,0 +1,39 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: local
+    hooks:
+      - id: restricted-filenames
+        name: Check commits for unexpected file extensions
+        entry: These file extensions are unusual and should be checked
+        language: fail
+        files: '.*\.(xlsx|doc)'
+      - id: restricted-file-types
+        name: Check commits for unexpected file types
+        entry: These file types are unusual and should be checked
+        language: fail
+        types: ['binary']
+        exclude_types: ['image', 'woff', 'eot', 'ttf']
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.1.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: (collection\.products\-endpoint|pandectes.+)\.liquid
+      - id: end-of-file-fixer
+        exclude_types: [svg]
+        exclude: (collection\.products\-endpoint|pandectes.+)\.liquid
+      - id: fix-byte-order-marker
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: mixed-line-ending
+        exclude: (collection\.products\-endpoint|pandectes.+)\.liquid
+      - id: check-added-large-files
+        args: ['--maxkb=200']
+      - id: check-merge-conflict
+      - id: detect-private-key
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v2.5.1
+    hooks:
+      - id: prettier
+        files: \.(js|css)$
+        exclude: (\.min\.js$)|((vendor|lazysizes|bc-sf-filter-lib|bc-sf-filter-backup|bold-.+|webfont|checkout-vendors).js)
