@@ -15,10 +15,10 @@ jobs:
 
     - uses: actions/setup-node@v4
 
-    - run: npm install -g semistandard
-
-    - run: npx semistandard --fix
-
     - run: pip install pre-commit
 
     - run: pre-commit run --all-files
+
+    - run: npm install -g semistandard
+
+    - run: npx semistandard --fix
