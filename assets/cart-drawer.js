@@ -1,5 +1,5 @@
 class CartDrawer extends HTMLElement {
-  constructor () {
+  constructor() {
     super();
 
     this.addEventListener('keyup', (evt) => evt.code === 'Escape' && this.close());
@@ -7,7 +7,7 @@ class CartDrawer extends HTMLElement {
     this.setHeaderCartIconAccessibility();
   }
 
-  setHeaderCartIconAccessibility () {
+  setHeaderCartIconAccessibility() {
     const cartLink = document.querySelector('#cart-icon-bubble');
     cartLink.setAttribute('role', 'button');
     cartLink.setAttribute('aria-haspopup', 'dialog');
@@ -23,7 +23,7 @@ class CartDrawer extends HTMLElement {
     });
   }
 
-  open (triggeredBy) {
+  open(triggeredBy) {
     if (triggeredBy) this.setActiveElement(triggeredBy);
     const cartDrawerNote = this.querySelector('[id^="Details-"] summary');
     if (cartDrawerNote && !cartDrawerNote.hasAttribute('role')) this.setSummaryAccessibility(cartDrawerNote);
@@ -47,13 +47,13 @@ class CartDrawer extends HTMLElement {
     document.body.classList.add('overflow-hidden');
   }
 
-  close () {
+  close() {
     this.classList.remove('active');
     removeTrapFocus(this.activeElement);
     document.body.classList.remove('overflow-hidden');
   }
 
-  setSummaryAccessibility (cartDrawerNote) {
+  setSummaryAccessibility(cartDrawerNote) {
     cartDrawerNote.setAttribute('role', 'button');
     cartDrawerNote.setAttribute('aria-expanded', 'false');
 
@@ -68,7 +68,7 @@ class CartDrawer extends HTMLElement {
     cartDrawerNote.parentElement.addEventListener('keyup', onKeyUpEscape);
   }
 
-  renderContents (parsedState) {
+  renderContents(parsedState) {
     this.querySelector('.drawer__inner').classList.contains('is-empty') &&
       this.querySelector('.drawer__inner').classList.remove('is-empty');
     this.productId = parsedState.id;
@@ -85,27 +85,27 @@ class CartDrawer extends HTMLElement {
     });
   }
 
-  getSectionInnerHTML (html, selector = '.shopify-section') {
+  getSectionInnerHTML(html, selector = '.shopify-section') {
     return new DOMParser().parseFromString(html, 'text/html').querySelector(selector).innerHTML;
   }
 
-  getSectionsToRender () {
+  getSectionsToRender() {
     return [
       {
         id: 'cart-drawer',
-        selector: '#CartDrawer'
+        selector: '#CartDrawer',
       },
       {
-        id: 'cart-icon-bubble'
-      }
+        id: 'cart-icon-bubble',
+      },
     ];
   }
 
-  getSectionDOM (html, selector = '.shopify-section') {
+  getSectionDOM(html, selector = '.shopify-section') {
     return new DOMParser().parseFromString(html, 'text/html').querySelector(selector);
   }
 
-  setActiveElement (element) {
+  setActiveElement(element) {
     this.activeElement = element;
   }
 }
@@ -113,18 +113,18 @@ class CartDrawer extends HTMLElement {
 customElements.define('cart-drawer', CartDrawer);
 
 class CartDrawerItems extends CartItems {
-  getSectionsToRender () {
+  getSectionsToRender() {
     return [
       {
         id: 'CartDrawer',
         section: 'cart-drawer',
-        selector: '.drawer__inner'
+        selector: '.drawer__inner',
       },
       {
         id: 'cart-icon-bubble',
         section: 'cart-icon-bubble',
-        selector: '.shopify-section'
-      }
+        selector: '.shopify-section',
+      },
     ];
   }
 }

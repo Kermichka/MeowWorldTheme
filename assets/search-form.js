@@ -1,5 +1,5 @@
 class SearchForm extends HTMLElement {
-  constructor () {
+  constructor() {
     super();
     this.input = this.querySelector('input[type="search"]');
     this.resetButton = this.querySelector('button[type="reset"]');
@@ -15,7 +15,7 @@ class SearchForm extends HTMLElement {
     }
   }
 
-  toggleResetButton () {
+  toggleResetButton() {
     const resetIsHidden = this.resetButton.classList.contains('hidden');
     if (this.input.value.length > 0 && resetIsHidden) {
       this.resetButton.classList.remove('hidden');
@@ -24,15 +24,15 @@ class SearchForm extends HTMLElement {
     }
   }
 
-  onChange () {
+  onChange() {
     this.toggleResetButton();
   }
 
-  shouldResetForm () {
+  shouldResetForm() {
     return !document.querySelector('[aria-selected="true"] a');
   }
 
-  onFormReset (event) {
+  onFormReset(event) {
     // Prevent default so the form reset doesn't set the value gotten from the url on page load
     event.preventDefault();
     // Don't reset if the user has selected an element on the predictive search dropdown
