@@ -14,4 +14,3 @@ labels: enhancement
 
 ## Additional context/screenshots
 <!-- Maybe a screenshot or design? -->
-

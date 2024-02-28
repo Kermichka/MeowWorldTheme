@@ -1,4 +1,4 @@
-### PR Summary: 
+### PR Summary:
 
 <!-- Please include a short description (using non-technical terms, 1-2 sentences) about the changes you are introducing, what problem is being fixed and/or describe the benefit to merchants. This content will be used in our release notes for Dawn on [themes.shopify.com](https://themes.shopify.com/themes/dawn/styles/default#ReleaseNotes). -->
 
