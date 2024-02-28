@@ -1,5 +1,5 @@
 class DetailsModal extends HTMLElement {
-  constructor () {
+  constructor() {
     super();
     this.detailsContainer = this.querySelector('details');
     this.summaryToggle = this.querySelector('summary');
@@ -11,20 +11,20 @@ class DetailsModal extends HTMLElement {
     this.summaryToggle.setAttribute('role', 'button');
   }
 
-  isOpen () {
+  isOpen() {
     return this.detailsContainer.hasAttribute('open');
   }
 
-  onSummaryClick (event) {
+  onSummaryClick(event) {
     event.preventDefault();
     event.target.closest('details').hasAttribute('open') ? this.close() : this.open(event);
   }
 
-  onBodyClick (event) {
+  onBodyClick(event) {
     if (!this.contains(event.target) || event.target.classList.contains('modal-overlay')) this.close(false);
   }
 
-  open (event) {
+  open(event) {
     this.onBodyClickEvent = this.onBodyClickEvent || this.onBodyClick.bind(this);
     event.target.closest('details').setAttribute('open', true);
     document.body.addEventListener('click', this.onBodyClickEvent);
@@ -36,7 +36,7 @@ class DetailsModal extends HTMLElement {
     );
   }
 
-  close (focusToggle = true) {
+  close(focusToggle = true) {
     removeTrapFocus(focusToggle ? this.summaryToggle : null);
     this.detailsContainer.removeAttribute('open');
     document.body.removeEventListener('click', this.onBodyClickEvent);

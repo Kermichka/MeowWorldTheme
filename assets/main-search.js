@@ -1,11 +1,11 @@
 class MainSearch extends SearchForm {
-  constructor () {
+  constructor() {
     super();
     this.allSearchInputs = document.querySelectorAll('input[type="search"]');
     this.setupEventListeners();
   }
 
-  setupEventListeners () {
+  setupEventListeners() {
     const allSearchForms = [];
     this.allSearchInputs.forEach((input) => allSearchForms.push(input.form));
     this.input.addEventListener('focus', this.onInputFocus.bind(this));
@@ -14,26 +14,26 @@ class MainSearch extends SearchForm {
     this.allSearchInputs.forEach((input) => input.addEventListener('input', this.onInput.bind(this)));
   }
 
-  onFormReset (event) {
+  onFormReset(event) {
     super.onFormReset(event);
     if (super.shouldResetForm()) {
       this.keepInSync('', this.input);
     }
   }
 
-  onInput (event) {
+  onInput(event) {
     const target = event.target;
     this.keepInSync(target.value, target);
   }
 
-  onInputFocus () {
+  onInputFocus() {
     const isSmallScreen = window.innerWidth < 750;
     if (isSmallScreen) {
       this.scrollIntoView({ behavior: 'smooth' });
     }
   }
 
-  keepInSync (value, target) {
+  keepInSync(value, target) {
     this.allSearchInputs.forEach((input) => {
       if (input !== target) {
         input.value = value;

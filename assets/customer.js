@@ -4,23 +4,23 @@ const selectors = {
   addressContainer: '[data-address]',
   toggleAddressButton: 'button[aria-expanded]',
   cancelAddressButton: 'button[type="reset"]',
-  deleteAddressButton: 'button[data-confirm-message]'
+  deleteAddressButton: 'button[data-confirm-message]',
 };
 
 const attributes = {
   expanded: 'aria-expanded',
-  confirmMessage: 'data-confirm-message'
+  confirmMessage: 'data-confirm-message',
 };
 
 class CustomerAddresses {
-  constructor () {
+  constructor() {
     this.elements = this._getElements();
     if (Object.keys(this.elements).length === 0) return;
     this._setupCountries();
     this._setupEventListeners();
   }
 
-  _getElements () {
+  _getElements() {
     const container = document.querySelector(selectors.customerAddresses);
     return container
       ? {
@@ -29,28 +29,28 @@ class CustomerAddresses {
           toggleButtons: document.querySelectorAll(selectors.toggleAddressButton),
           cancelButtons: container.querySelectorAll(selectors.cancelAddressButton),
           deleteButtons: container.querySelectorAll(selectors.deleteAddressButton),
-          countrySelects: container.querySelectorAll(selectors.addressCountrySelect)
+          countrySelects: container.querySelectorAll(selectors.addressCountrySelect),
         }
       : {};
   }
 
-  _setupCountries () {
+  _setupCountries() {
     if (Shopify && Shopify.CountryProvinceSelector) {
       // eslint-disable-next-line no-new
       new Shopify.CountryProvinceSelector('AddressCountryNew', 'AddressProvinceNew', {
-        hideElement: 'AddressProvinceContainerNew'
+        hideElement: 'AddressProvinceContainerNew',
       });
       this.elements.countrySelects.forEach((select) => {
         const formId = select.dataset.formId;
         // eslint-disable-next-line no-new
         new Shopify.CountryProvinceSelector(`AddressCountry_${formId}`, `AddressProvince_${formId}`, {
-          hideElement: `AddressProvinceContainer_${formId}`
+          hideElement: `AddressProvinceContainer_${formId}`,
         });
       });
     }
   }
 
-  _setupEventListeners () {
+  _setupEventListeners() {
     this.elements.toggleButtons.forEach((element) => {
       element.addEventListener('click', this._handleAddEditButtonClick);
     });
@@ -62,7 +62,7 @@ class CustomerAddresses {
     });
   }
 
-  _toggleExpanded (target) {
+  _toggleExpanded(target) {
     target.setAttribute(attributes.expanded, (target.getAttribute(attributes.expanded) === 'false').toString());
   }
 
@@ -78,7 +78,7 @@ class CustomerAddresses {
     // eslint-disable-next-line no-alert
     if (confirm(currentTarget.getAttribute(attributes.confirmMessage))) {
       Shopify.postLink(currentTarget.dataset.target, {
-        parameters: { _method: 'delete' }
+        parameters: { _method: 'delete' },
       });
     }
   };

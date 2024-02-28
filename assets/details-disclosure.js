@@ -1,5 +1,5 @@
 class DetailsDisclosure extends HTMLElement {
-  constructor () {
+  constructor() {
     super();
     this.mainDetailsToggle = this.querySelector('details');
     this.content = this.mainDetailsToggle.querySelector('summary').nextElementSibling;
@@ -8,13 +8,13 @@ class DetailsDisclosure extends HTMLElement {
     this.mainDetailsToggle.addEventListener('toggle', this.onToggle.bind(this));
   }
 
-  onFocusOut () {
+  onFocusOut() {
     setTimeout(() => {
       if (!this.contains(document.activeElement)) this.close();
     });
   }
 
-  onToggle () {
+  onToggle() {
     if (!this.animations) this.animations = this.content.getAnimations();
 
     if (this.mainDetailsToggle.hasAttribute('open')) {
@@ -24,7 +24,7 @@ class DetailsDisclosure extends HTMLElement {
     }
   }
 
-  close () {
+  close() {
     this.mainDetailsToggle.removeAttribute('open');
     this.mainDetailsToggle.querySelector('summary').setAttribute('aria-expanded', false);
   }
@@ -33,12 +33,12 @@ class DetailsDisclosure extends HTMLElement {
 customElements.define('details-disclosure', DetailsDisclosure);
 
 class HeaderMenu extends DetailsDisclosure {
-  constructor () {
+  constructor() {
     super();
     this.header = document.querySelector('.header-wrapper');
   }
 
-  onToggle () {
+  onToggle() {
     if (!this.header) return;
     this.header.preventHide = this.mainDetailsToggle.open;
 

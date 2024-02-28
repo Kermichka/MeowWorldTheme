@@ -2,7 +2,7 @@ if (!customElements.get('product-form')) {
   customElements.define(
     'product-form',
     class ProductForm extends HTMLElement {
-      constructor () {
+      constructor() {
         super();
 
         this.form = this.querySelector('form');
@@ -16,7 +16,7 @@ if (!customElements.get('product-form')) {
         this.hideErrors = this.dataset.hideErrors === 'true';
       }
 
-      onSubmitHandler (evt) {
+      onSubmitHandler(evt) {
         evt.preventDefault();
         if (this.submitButton.getAttribute('aria-disabled') === 'true') return;
 
@@ -49,7 +49,7 @@ if (!customElements.get('product-form')) {
                 source: 'product-form',
                 productVariantId: formData.get('id'),
                 errors: response.errors || response.description,
-                message: response.message
+                message: response.message,
               });
               this.handleErrorMessage(response.description);
 
@@ -69,7 +69,7 @@ if (!customElements.get('product-form')) {
               publish(PUB_SUB_EVENTS.cartUpdate, {
                 source: 'product-form',
                 productVariantId: formData.get('id'),
-                cartData: response
+                cartData: response,
               });
             }
             this.error = false;
@@ -100,7 +100,7 @@ if (!customElements.get('product-form')) {
           });
       }
 
-      handleErrorMessage (errorMessage = false) {
+      handleErrorMessage(errorMessage = false) {
         if (this.hideErrors) return;
 
         this.errorMessageWrapper =

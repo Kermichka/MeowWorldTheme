@@ -2,20 +2,20 @@ if (!customElements.get('product-modal')) {
   customElements.define(
     'product-modal',
     class ProductModal extends ModalDialog {
-      constructor () {
+      constructor() {
         super();
       }
 
-      hide () {
+      hide() {
         super.hide();
       }
 
-      show (opener) {
+      show(opener) {
         super.show(opener);
         this.showActiveMedia();
       }
 
-      showActiveMedia () {
+      showActiveMedia() {
         this.querySelectorAll(
           `[data-media-id]:not([data-media-id="${this.openedBy.getAttribute('data-media-id')}"])`
         ).forEach((element) => {
@@ -34,7 +34,9 @@ if (!customElements.get('product-modal')) {
           activeMedia.nodeName == 'DEFERRED-MEDIA' &&
           activeMediaContent &&
           activeMediaContent.querySelector('.js-youtube')
-        ) { activeMedia.loadContent(); }
+        ) {
+          activeMedia.loadContent();
+        }
       }
     }
   );

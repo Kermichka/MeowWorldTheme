@@ -2,12 +2,12 @@ if (!customElements.get('media-gallery')) {
   customElements.define(
     'media-gallery',
     class MediaGallery extends HTMLElement {
-      constructor () {
+      constructor() {
         super();
         this.elements = {
           liveRegion: this.querySelector('[id^="GalleryStatus"]'),
           viewer: this.querySelector('[id^="GalleryViewer"]'),
-          thumbnails: this.querySelector('[id^="GalleryThumbnails"]')
+          thumbnails: this.querySelector('[id^="GalleryThumbnails"]'),
         };
         this.mql = window.matchMedia('(min-width: 750px)');
         if (!this.elements.thumbnails) return;
@@ -21,14 +21,14 @@ if (!customElements.get('media-gallery')) {
         if (this.dataset.desktopLayout.includes('thumbnail') && this.mql.matches) this.removeListSemantic();
       }
 
-      onSlideChanged (event) {
+      onSlideChanged(event) {
         const thumbnail = this.elements.thumbnails.querySelector(
           `[data-target="${event.detail.currentElement.dataset.mediaId}"]`
         );
         this.setActiveThumbnail(thumbnail);
       }
 
-      setActiveMedia (mediaId, prepend) {
+      setActiveMedia(mediaId, prepend) {
         const activeMedia = this.elements.viewer.querySelector(`[data-media-id="${mediaId}"]`);
         this.elements.viewer.querySelectorAll('[data-media-id]').forEach((element) => {
           element.classList.remove('is-active');
@@ -61,7 +61,7 @@ if (!customElements.get('media-gallery')) {
         this.announceLiveRegion(activeMedia, activeThumbnail.dataset.mediaPosition);
       }
 
-      setActiveThumbnail (thumbnail) {
+      setActiveThumbnail(thumbnail) {
         if (!this.elements.thumbnails || !thumbnail) return;
 
         this.elements.thumbnails
@@ -73,7 +73,7 @@ if (!customElements.get('media-gallery')) {
         this.elements.thumbnails.slider.scrollTo({ left: thumbnail.offsetLeft });
       }
 
-      announceLiveRegion (activeItem, position) {
+      announceLiveRegion(activeItem, position) {
         const image = activeItem.querySelector('.product__modal-opener--image img');
         if (!image) return;
         image.onload = () => {
@@ -86,19 +86,19 @@ if (!customElements.get('media-gallery')) {
         image.src = image.src;
       }
 
-      playActiveMedia (activeItem) {
+      playActiveMedia(activeItem) {
         window.pauseAllMedia();
         const deferredMedia = activeItem.querySelector('.deferred-media');
         if (deferredMedia) deferredMedia.loadContent(false);
       }
 
-      preventStickyHeader () {
+      preventStickyHeader() {
         this.stickyHeader = this.stickyHeader || document.querySelector('sticky-header');
         if (!this.stickyHeader) return;
         this.stickyHeader.dispatchEvent(new Event('preventHeaderReveal'));
       }
 
-      removeListSemantic () {
+      removeListSemantic() {
         if (!this.elements.viewer.slider) return;
         this.elements.viewer.slider.setAttribute('role', 'presentation');
         this.elements.viewer.sliderItems.forEach((slide) => slide.setAttribute('role', 'presentation'));
