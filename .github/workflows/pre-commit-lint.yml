@@ -9,12 +9,16 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - uses: actions/setup-python@v2
+    - uses: actions/setup-python@v3
       with:
         python-version: '3.12'
+
+    - run: npm install
+
+    - run: npm install -g semistandard
+
+    - run: npx semistandard --fix
 
     - run: pip install pre-commit
 
     - run: pre-commit run --all-files
-
-    - run: npm run lint

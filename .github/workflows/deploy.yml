@@ -14,14 +14,34 @@ jobs:
             SHOPIFY_CLI_THEME_TOKEN: 'MWD_SHOPIFY_CLI_THEME_TOKEN'
             SHOPIFY_THEME_ID: '164839686455' # [UNSTABLE]
 
-    steps:
-      - uses: actions/checkout@v1
+          # - SHOPIFY_FLAG_STORE: 'dev-online-store-2'
+          #   SHOPIFY_CLI_THEME_TOKEN: 'DEV_ONLINE_STORE_2_SHOPIFY_CLI_THEME_TOKEN'
+          #   SHOPIFY_THEME_ID: '166294487354' # [UNSTABLE] Symmetry
 
-      - uses: actions/setup-node@v3
+          # - SHOPIFY_FLAG_STORE: 'huntbikewheels'
+          #   SHOPIFY_CLI_THEME_TOKEN: 'HUNT_UK_SHOPIFY_CLI_THEME_TOKEN'
+          #   SHOPIFY_THEME_ID: '126300192845' # [UNSTABLE] Symmetry
+
+          # - SHOPIFY_FLAG_STORE: 'huntbikewheels-us'
+          #   SHOPIFY_CLI_THEME_TOKEN: 'HUNT_US_SHOPIFY_CLI_THEME_TOKEN'
+          #   SHOPIFY_THEME_ID: NOT_YET_CREATED
+
+          # - SHOPIFY_FLAG_STORE: 'huntbikewheels-eu'
+          #   SHOPIFY_CLI_THEME_TOKEN: 'HUNT_EU_SHOPIFY_CLI_THEME_TOKEN'
+          #   SHOPIFY_THEME_ID: '131981934784' # [UNSTABLE] Symmetry
+
+          # - SHOPIFY_FLAG_STORE: 'huntbikewheels-cc'
+          #   SHOPIFY_CLI_THEME_TOKEN: 'HUNT_CC_SHOPIFY_CLI_THEME_TOKEN'
+          #   SHOPIFY_THEME_ID: NOT_YET_CREATED
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v20
         with:
           node-version: 18
 
-      - uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@v3
         with:
           ruby-version: 3.1
           bundler: 'latest'
