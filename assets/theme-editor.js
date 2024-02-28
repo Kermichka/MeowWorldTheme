@@ -1,4 +1,4 @@
-function hideProductModal() {
+function hideProductModal () {
   const productModal = document.querySelectorAll('product-modal[open]');
   productModal && productModal.forEach((modal) => modal.hide());
 }
@@ -13,7 +13,7 @@ document.addEventListener('shopify:block:select', function (event) {
 
   setTimeout(function () {
     parentSlideshowComponent.slider.scrollTo({
-      left: event.target.offsetLeft,
+      left: event.target.offsetLeft
     });
   }, 200);
 });

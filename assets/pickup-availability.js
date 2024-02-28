@@ -2,7 +2,7 @@ if (!customElements.get('pickup-availability')) {
   customElements.define(
     'pickup-availability',
     class PickupAvailability extends HTMLElement {
-      constructor() {
+      constructor () {
         super();
 
         if (!this.hasAttribute('available')) return;
@@ -12,7 +12,7 @@ if (!customElements.get('pickup-availability')) {
         this.fetchAvailability(this.dataset.variantId);
       }
 
-      fetchAvailability(variantId) {
+      fetchAvailability (variantId) {
         let rootUrl = this.dataset.rootUrl;
         if (!rootUrl.endsWith('/')) {
           rootUrl = rootUrl + '/';
@@ -34,18 +34,18 @@ if (!customElements.get('pickup-availability')) {
           });
       }
 
-      onClickRefreshList(evt) {
+      onClickRefreshList (evt) {
         this.fetchAvailability(this.dataset.variantId);
       }
 
-      renderError() {
+      renderError () {
         this.innerHTML = '';
         this.appendChild(this.errorHtml);
 
         this.querySelector('button').addEventListener('click', this.onClickRefreshList);
       }
 
-      renderPreview(sectionInnerHTML) {
+      renderPreview (sectionInnerHTML) {
         const drawer = document.querySelector('pickup-availability-drawer');
         if (drawer) drawer.remove();
         if (!sectionInnerHTML.querySelector('pickup-availability-preview')) {
@@ -60,10 +60,11 @@ if (!customElements.get('pickup-availability')) {
         document.body.appendChild(sectionInnerHTML.querySelector('pickup-availability-drawer'));
 
         const button = this.querySelector('button');
-        if (button)
+        if (button) {
           button.addEventListener('click', (evt) => {
             document.querySelector('pickup-availability-drawer').show(evt.target);
           });
+        }
       }
     }
   );
@@ -73,7 +74,7 @@ if (!customElements.get('pickup-availability-drawer')) {
   customElements.define(
     'pickup-availability-drawer',
     class PickupAvailabilityDrawer extends HTMLElement {
-      constructor() {
+      constructor () {
         super();
 
         this.onBodyClick = this.handleBodyClick.bind(this);
@@ -87,7 +88,7 @@ if (!customElements.get('pickup-availability-drawer')) {
         });
       }
 
-      handleBodyClick(evt) {
+      handleBodyClick (evt) {
         const target = evt.target;
         if (
           target != this &&
@@ -98,14 +99,14 @@ if (!customElements.get('pickup-availability-drawer')) {
         }
       }
 
-      hide() {
+      hide () {
         this.removeAttribute('open');
         document.body.removeEventListener('click', this.onBodyClick);
         document.body.classList.remove('overflow-hidden');
         removeTrapFocus(this.focusElement);
       }
 
-      show(focusElement) {
+      show (focusElement) {
         this.focusElement = focusElement;
         this.setAttribute('open', '');
         document.body.addEventListener('click', this.onBodyClick);

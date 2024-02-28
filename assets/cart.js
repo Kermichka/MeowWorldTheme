@@ -1,5 +1,5 @@
 class CartRemoveButton extends HTMLElement {
-  constructor() {
+  constructor () {
     super();
 
     this.addEventListener('click', (event) => {
@@ -13,7 +13,7 @@ class CartRemoveButton extends HTMLElement {
 customElements.define('cart-remove-button', CartRemoveButton);
 
 class CartItems extends HTMLElement {
-  constructor() {
+  constructor () {
     super();
     this.lineItemStatusElement =
       document.getElementById('shopping-cart-line-item-status') || document.getElementById('CartDrawer-LineItemStatus');
@@ -27,7 +27,7 @@ class CartItems extends HTMLElement {
 
   cartUpdateUnsubscriber = undefined;
 
-  connectedCallback() {
+  connectedCallback () {
     this.cartUpdateUnsubscriber = subscribe(PUB_SUB_EVENTS.cartUpdate, (event) => {
       if (event.source === 'cart-items') {
         return;
@@ -36,13 +36,13 @@ class CartItems extends HTMLElement {
     });
   }
 
-  disconnectedCallback() {
+  disconnectedCallback () {
     if (this.cartUpdateUnsubscriber) {
       this.cartUpdateUnsubscriber();
     }
   }
 
-  onChange(event) {
+  onChange (event) {
     this.updateQuantity(
       event.target.dataset.index,
       event.target.value,
@@ -51,7 +51,7 @@ class CartItems extends HTMLElement {
     );
   }
 
-  onCartUpdate() {
+  onCartUpdate () {
     if (this.tagName === 'CART-DRAWER-ITEMS') {
       fetch(`${routes.cart_url}?section_id=cart-drawer`)
         .then((response) => response.text())
@@ -83,39 +83,39 @@ class CartItems extends HTMLElement {
     }
   }
 
-  getSectionsToRender() {
+  getSectionsToRender () {
     return [
       {
         id: 'main-cart-items',
         section: document.getElementById('main-cart-items').dataset.id,
-        selector: '.js-contents',
+        selector: '.js-contents'
       },
       {
         id: 'cart-icon-bubble',
         section: 'cart-icon-bubble',
-        selector: '.shopify-section',
+        selector: '.shopify-section'
       },
       {
         id: 'cart-live-region-text',
         section: 'cart-live-region-text',
-        selector: '.shopify-section',
+        selector: '.shopify-section'
       },
       {
         id: 'main-cart-footer',
         section: document.getElementById('main-cart-footer').dataset.id,
-        selector: '.js-contents',
-      },
+        selector: '.js-contents'
+      }
     ];
   }
 
-  updateQuantity(line, quantity, name, variantId) {
+  updateQuantity (line, quantity, name, variantId) {
     this.enableLoading(line);
 
     const body = JSON.stringify({
       line,
       quantity,
       sections: this.getSectionsToRender().map((section) => section.section),
-      sections_url: window.location.pathname,
+      sections_url: window.location.pathname
     });
 
     fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
@@ -172,7 +172,7 @@ class CartItems extends HTMLElement {
           trapFocus(cartDrawerWrapper, document.querySelector('.cart-item__name'));
         }
 
-        publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items', cartData: parsedState, variantId: variantId });
+        publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items', cartData: parsedState, variantId });
       })
       .catch(() => {
         this.querySelectorAll('.loading-overlay').forEach((overlay) => overlay.classList.add('hidden'));
@@ -184,7 +184,7 @@ class CartItems extends HTMLElement {
       });
   }
 
-  updateLiveRegions(line, message) {
+  updateLiveRegions (line, message) {
     const lineItemError =
       document.getElementById(`Line-item-error-${line}`) || document.getElementById(`CartDrawer-LineItemError-${line}`);
     if (lineItemError) lineItemError.querySelector('.cart-item__error-text').innerHTML = message;
@@ -200,11 +200,11 @@ class CartItems extends HTMLElement {
     }, 1000);
   }
 
-  getSectionInnerHTML(html, selector) {
+  getSectionInnerHTML (html, selector) {
     return new DOMParser().parseFromString(html, 'text/html').querySelector(selector).innerHTML;
   }
 
-  enableLoading(line) {
+  enableLoading (line) {
     const mainCartItems = document.getElementById('main-cart-items') || document.getElementById('CartDrawer-CartItems');
     mainCartItems.classList.add('cart__items--disabled');
 
@@ -217,7 +217,7 @@ class CartItems extends HTMLElement {
     this.lineItemStatusElement.setAttribute('aria-hidden', false);
   }
 
-  disableLoading(line) {
+  disableLoading (line) {
     const mainCartItems = document.getElementById('main-cart-items') || document.getElementById('CartDrawer-CartItems');
     mainCartItems.classList.remove('cart__items--disabled');
 
@@ -235,7 +235,7 @@ if (!customElements.get('cart-note')) {
   customElements.define(
     'cart-note',
     class CartNote extends HTMLElement {
-      constructor() {
+      constructor () {
         super();
 
         this.addEventListener(

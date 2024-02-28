@@ -2,7 +2,7 @@ if (!customElements.get('show-more-button')) {
   customElements.define(
     'show-more-button',
     class ShowMoreButton extends HTMLElement {
-      constructor() {
+      constructor () {
         super();
         const button = this.querySelector('button');
         button.addEventListener('click', (event) => {
@@ -17,7 +17,8 @@ if (!customElements.get('show-more-button')) {
           }
         });
       }
-      expandShowMore(event) {
+
+      expandShowMore (event) {
         const parentDisplay = event.target.closest('[id^="Show-More-"]').closest('.parent-display');
         const parentWrap = parentDisplay.querySelector('.parent-wrap');
         this.querySelectorAll('.label-text').forEach((element) => element.classList.toggle('hidden'));

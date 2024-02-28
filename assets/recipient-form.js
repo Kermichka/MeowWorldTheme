@@ -2,7 +2,7 @@ if (!customElements.get('recipient-form')) {
   customElements.define(
     'recipient-form',
     class RecipientForm extends HTMLElement {
-      constructor() {
+      constructor () {
         super();
         this.recipientFieldsLiveRegion = this.querySelector(`#Recipient-fields-live-region-${this.dataset.sectionId}`);
         this.checkboxInput = this.querySelector(`#Recipient-checkbox-${this.dataset.sectionId}`);
@@ -29,7 +29,7 @@ if (!customElements.get('recipient-form')) {
       variantChangeUnsubscriber = undefined;
       cartErrorUnsubscriber = undefined;
 
-      connectedCallback() {
+      connectedCallback () {
         this.cartUpdateUnsubscriber = subscribe(PUB_SUB_EVENTS.cartUpdate, (event) => {
           if (event.source === 'product-form' && event.productVariantId.toString() === this.currentProductVariantId) {
             this.resetRecipientForm();
@@ -49,7 +49,7 @@ if (!customElements.get('recipient-form')) {
         });
       }
 
-      disconnectedCallback() {
+      disconnectedCallback () {
         if (this.cartUpdateUnsubscriber) {
           this.cartUpdateUnsubscriber();
         }
@@ -63,7 +63,7 @@ if (!customElements.get('recipient-form')) {
         }
       }
 
-      onChange() {
+      onChange () {
         if (this.checkboxInput.checked) {
           this.enableInputFields();
           this.recipientFieldsLiveRegion.innerText = window.accessibilityStrings.recipientFormExpanded;
@@ -75,27 +75,27 @@ if (!customElements.get('recipient-form')) {
         }
       }
 
-      inputFields() {
+      inputFields () {
         return [this.emailInput, this.nameInput, this.messageInput, this.sendonInput];
       }
 
-      disableableFields() {
+      disableableFields () {
         return [...this.inputFields(), this.offsetProperty];
       }
 
-      clearInputFields() {
+      clearInputFields () {
         this.inputFields().forEach((field) => (field.value = ''));
       }
 
-      enableInputFields() {
+      enableInputFields () {
         this.disableableFields().forEach((field) => (field.disabled = false));
       }
 
-      disableInputFields() {
+      disableInputFields () {
         this.disableableFields().forEach((field) => (field.disabled = true));
       }
 
-      displayErrorMessage(title, body) {
+      displayErrorMessage (title, body) {
         this.clearErrorMessage();
         this.errorMessageWrapper.hidden = false;
         if (typeof body === 'object') {
@@ -126,7 +126,7 @@ if (!customElements.get('recipient-form')) {
         this.errorMessage.innerText = body;
       }
 
-      createErrorListItem(target, message) {
+      createErrorListItem (target, message) {
         const li = document.createElement('li');
         const a = document.createElement('a');
         a.setAttribute('href', target);
@@ -136,7 +136,7 @@ if (!customElements.get('recipient-form')) {
         return li;
       }
 
-      clearErrorMessage() {
+      clearErrorMessage () {
         this.errorMessageWrapper.hidden = true;
 
         if (this.errorMessageList) this.errorMessageList.innerHTML = '';
@@ -153,7 +153,7 @@ if (!customElements.get('recipient-form')) {
         });
       }
 
-      resetRecipientForm() {
+      resetRecipientForm () {
         if (this.checkboxInput.checked) {
           this.checkboxInput.checked = false;
           this.clearInputFields();

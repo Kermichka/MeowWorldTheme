@@ -2,7 +2,7 @@ if (!customElements.get('product-info')) {
   customElements.define(
     'product-info',
     class ProductInfo extends HTMLElement {
-      constructor() {
+      constructor () {
         super();
         this.input = this.querySelector('.quantity__input');
         this.currentVariant = this.querySelector('.product-variant-id');
@@ -13,7 +13,7 @@ if (!customElements.get('product-info')) {
       cartUpdateUnsubscriber = undefined;
       variantChangeUnsubscriber = undefined;
 
-      connectedCallback() {
+      connectedCallback () {
         if (!this.input) return;
         this.quantityForm = this.querySelector('.product-form__quantity');
         if (!this.quantityForm) return;
@@ -29,7 +29,7 @@ if (!customElements.get('product-info')) {
         });
       }
 
-      disconnectedCallback() {
+      disconnectedCallback () {
         if (this.cartUpdateUnsubscriber) {
           this.cartUpdateUnsubscriber();
         }
@@ -38,12 +38,12 @@ if (!customElements.get('product-info')) {
         }
       }
 
-      setQuantityBoundries() {
+      setQuantityBoundries () {
         const data = {
           cartQuantity: this.input.dataset.cartQuantity ? parseInt(this.input.dataset.cartQuantity) : 0,
           min: this.input.dataset.min ? parseInt(this.input.dataset.min) : 1,
           max: this.input.dataset.max ? parseInt(this.input.dataset.max) : null,
-          step: this.input.step ? parseInt(this.input.step) : 1,
+          step: this.input.step ? parseInt(this.input.step) : 1
         };
 
         let min = data.min;
@@ -57,7 +57,7 @@ if (!customElements.get('product-info')) {
         publish(PUB_SUB_EVENTS.quantityUpdate, undefined);
       }
 
-      fetchQuantityRules() {
+      fetchQuantityRules () {
         if (!this.currentVariant || !this.currentVariant.value) return;
         this.querySelector('.quantity__rules-cart .loading-overlay').classList.remove('hidden');
         fetch(`${this.dataset.url}?variant=${this.currentVariant.value}&section_id=${this.dataset.section}`)
@@ -77,16 +77,16 @@ if (!customElements.get('product-info')) {
           });
       }
 
-      updateQuantityRules(sectionId, html) {
+      updateQuantityRules (sectionId, html) {
         const quantityFormUpdated = html.getElementById(`Quantity-Form-${sectionId}`);
         const selectors = ['.quantity__input', '.quantity__rules', '.quantity__label'];
-        for (let selector of selectors) {
+        for (const selector of selectors) {
           const current = this.quantityForm.querySelector(selector);
           const updated = quantityFormUpdated.querySelector(selector);
           if (!current || !updated) continue;
           if (selector === '.quantity__input') {
             const attributes = ['data-cart-quantity', 'data-min', 'data-max', 'step'];
-            for (let attribute of attributes) {
+            for (const attribute of attributes) {
               const valueUpdated = updated.getAttribute(attribute);
               if (valueUpdated !== null) current.setAttribute(attribute, valueUpdated);
             }

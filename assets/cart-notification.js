@@ -1,5 +1,5 @@
 class CartNotification extends HTMLElement {
-  constructor() {
+  constructor () {
     super();
 
     this.notification = document.getElementById('cart-notification');
@@ -12,7 +12,7 @@ class CartNotification extends HTMLElement {
     );
   }
 
-  open() {
+  open () {
     this.notification.classList.add('animate', 'active');
 
     this.notification.addEventListener(
@@ -27,14 +27,14 @@ class CartNotification extends HTMLElement {
     document.body.addEventListener('click', this.onBodyClick);
   }
 
-  close() {
+  close () {
     this.notification.classList.remove('active');
     document.body.removeEventListener('click', this.onBodyClick);
 
     removeTrapFocus(this.activeElement);
   }
 
-  renderContents(parsedState) {
+  renderContents (parsedState) {
     this.cartItemKey = parsedState.key;
     this.getSectionsToRender().forEach((section) => {
       document.getElementById(section.id).innerHTML = this.getSectionInnerHTML(
@@ -47,26 +47,26 @@ class CartNotification extends HTMLElement {
     this.open();
   }
 
-  getSectionsToRender() {
+  getSectionsToRender () {
     return [
       {
         id: 'cart-notification-product',
-        selector: `[id="cart-notification-product-${this.cartItemKey}"]`,
+        selector: `[id="cart-notification-product-${this.cartItemKey}"]`
       },
       {
-        id: 'cart-notification-button',
+        id: 'cart-notification-button'
       },
       {
-        id: 'cart-icon-bubble',
-      },
+        id: 'cart-icon-bubble'
+      }
     ];
   }
 
-  getSectionInnerHTML(html, selector = '.shopify-section') {
+  getSectionInnerHTML (html, selector = '.shopify-section') {
     return new DOMParser().parseFromString(html, 'text/html').querySelector(selector).innerHTML;
   }
 
-  handleBodyClick(evt) {
+  handleBodyClick (evt) {
     const target = evt.target;
     if (target !== this.notification && !target.closest('cart-notification')) {
       const disclosure = target.closest('details-disclosure, header-menu');
@@ -75,7 +75,7 @@ class CartNotification extends HTMLElement {
     }
   }
 
-  setActiveElement(element) {
+  setActiveElement (element) {
     this.activeElement = element;
   }
 }

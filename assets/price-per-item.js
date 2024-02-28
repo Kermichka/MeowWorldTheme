@@ -2,7 +2,7 @@ if (!customElements.get('price-per-item')) {
   customElements.define(
     'price-per-item',
     class PricePerItem extends HTMLElement {
-      constructor() {
+      constructor () {
         super();
         this.variantId = this.dataset.variantId;
         this.input = document.getElementById(`Quantity-${this.dataset.sectionId || this.dataset.variantId}`);
@@ -16,7 +16,7 @@ if (!customElements.get('price-per-item')) {
       updatePricePerItemUnsubscriber = undefined;
       variantIdChangedUnsubscriber = undefined;
 
-      connectedCallback() {
+      connectedCallback () {
         // Update variantId if variant is switched on product page
         this.variantIdChangedUnsubscriber = subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
           this.variantId = event.data.variant.id.toString();
@@ -27,7 +27,7 @@ if (!customElements.get('price-per-item')) {
           if (!response.cartData) return;
 
           // Item was added to cart via product page
-          if (response.cartData['variant_id'] !== undefined) {
+          if (response.cartData.variant_id !== undefined) {
             if (response.productVariantId === this.variantId) this.updatePricePerItem(response.cartData.quantity);
             // Qty was updated in cart
           } else if (response.cartData.item_count !== 0) {
@@ -46,7 +46,7 @@ if (!customElements.get('price-per-item')) {
         });
       }
 
-      disconnectedCallback() {
+      disconnectedCallback () {
         if (this.updatePricePerItemUnsubscriber) {
           this.updatePricePerItemUnsubscriber();
         }
@@ -55,11 +55,11 @@ if (!customElements.get('price-per-item')) {
         }
       }
 
-      onInputChange() {
+      onInputChange () {
         this.updatePricePerItem();
       }
 
-      updatePricePerItem(updatedCartQuantity) {
+      updatePricePerItem (updatedCartQuantity) {
         if (this.input) {
           this.enteredQty = parseInt(this.input.value);
           this.step = parseInt(this.input.step);
@@ -75,7 +75,7 @@ if (!customElements.get('price-per-item')) {
         if (this.classList.contains('variant-item__price-per-item')) {
           this.currentQtyForVolumePricing = this.getCartQuantity(updatedCartQuantity);
         }
-        for (let pair of this.qtyPricePairs) {
+        for (const pair of this.qtyPricePairs) {
           if (this.currentQtyForVolumePricing >= pair[0]) {
             const pricePerItemCurrent = document.querySelector(
               `price-per-item[id^="Price-Per-Item-${
@@ -90,13 +90,13 @@ if (!customElements.get('price-per-item')) {
         }
       }
 
-      getCartQuantity(updatedCartQuantity) {
+      getCartQuantity (updatedCartQuantity) {
         return updatedCartQuantity || updatedCartQuantity === 0
           ? updatedCartQuantity
           : parseInt(this.input.dataset.cartQuantity);
       }
 
-      getVolumePricingArray() {
+      getVolumePricingArray () {
         const volumePricing = document.getElementById(`Volume-${this.dataset.sectionId || this.dataset.variantId}`);
         this.qtyPricePairs = [];
 
