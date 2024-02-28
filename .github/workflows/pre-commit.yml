@@ -17,4 +17,6 @@ jobs:
 
     - run: pre-commit run --all-files
 
+    - run: npm init
+
     - run: npm run lint
