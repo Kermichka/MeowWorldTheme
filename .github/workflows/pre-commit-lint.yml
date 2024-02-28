@@ -15,8 +15,6 @@ jobs:
 
     - uses: actions/setup-node@v4
 
-    - run: npm install
-
     - run: npm install -g semistandard
 
     - run: npx semistandard --fix
