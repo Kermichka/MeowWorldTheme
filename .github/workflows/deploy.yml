@@ -15,7 +15,7 @@ jobs:
             SHOPIFY_THEME_ID: '164839686455' # [UNSTABLE]
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
 
