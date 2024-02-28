@@ -2,7 +2,7 @@ if (!customElements.get('quantity-popover')) {
   customElements.define(
     'quantity-popover',
     class QuantityPopover extends HTMLElement {
-      constructor () {
+      constructor() {
         super();
         this.mql = window.matchMedia('(min-width: 990px)');
         this.mqlTablet = window.matchMedia('(min-width: 750px)');
@@ -37,7 +37,7 @@ if (!customElements.get('quantity-popover')) {
         }
       }
 
-      togglePopover (event) {
+      togglePopover(event) {
         event.preventDefault();
         if (event.type === 'mouseenter') {
           this.eventMouseEnterHappened = true;
@@ -61,7 +61,7 @@ if (!customElements.get('quantity-popover')) {
         }
       }
 
-      closePopover (event) {
+      closePopover(event) {
         event.preventDefault();
         const isChild = this.variantInfo.contains(event.relatedTarget);
 
