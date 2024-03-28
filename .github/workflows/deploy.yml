@@ -11,7 +11,7 @@ jobs:
       matrix:
         include:
           - SHOPIFY_FLAG_STORE: 'meow-world-development'
-            SHOPIFY_CLI_THEME_TOKEN: 'MWD_SHOPIFY_CLI_THEME_TOKEN'
+            SHOPIFY_CLI_THEME_TOKEN: '${{ secrets[matrix.MWD_SHOPIFY_CLI_THEME_TOKEN] }}'
             SHOPIFY_THEME_ID: '164839686455' # [UNSTABLE]
 
         # - SHOPIFY_FLAG_STORE: 'dev-online-store-2'
@@ -50,5 +50,5 @@ jobs:
       - name: Deploy
         env:
           SHOPIFY_FLAG_STORE: ${{ matrix.SHOPIFY_FLAG_STORE }}
-          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets[matrix.SHOPIFY_CLI_THEME_TOKEN] }}
+          SHOPIFY_CLI_THEME_TOKEN: ${{ matrix.SHOPIFY_CLI_THEME_TOKEN }}
         run: shopify theme push --path ./ -t ${{ matrix.SHOPIFY_THEME_ID }}
